@@ -55,8 +55,10 @@ class Runtime {
     this.processer.onExit(next => this.destroy().then(next).catch(next));
     this.sandbox = new sandbox(args);
     this.sandbox.kill = this.processer.kill.bind(this.processer);
-    this.sandbox.createAgent = (name, file, _args) => this.processer.createAgent(args.cwd || process.cwd(), name, file, _args);
-    this.sandbox.createWorkerForker = (file, _args) => this.processer.createWorkerForker(args.cwd || process.cwd(), 'worker', file, _args);
+    if (args.kind !== CHILD_PROCESS_TYPE.WORKER) {
+      this.sandbox.createAgent = (name, file, _args) => this.processer.createAgent(args.cwd || process.cwd(), name, file, _args);
+      this.sandbox.createWorkerForker = (file, _args) => this.processer.createWorkerForker(args.cwd || process.cwd(), 'worker', file, _args);
+    }
   }
 
   async create() {
@@ -73,8 +75,8 @@ class Runtime {
     process.off('message', this.messageHandler);
     delete this.sandbox.send;
     delete this.sandbox.kill;
-    delete this.sandbox.createAgent;
-    delete this.sandbox.createWorkerForker;
+    if (this.sandbox.createAgent) delete this.sandbox.createAgent;
+    if (this.sandbox.createWorkerForker) delete this.sandbox.createWorkerForker;
     unbindError(this.errorHandler);
     const errorHandler = err => console.error('[closing error]:', err);
     bindError(errorHandler);
