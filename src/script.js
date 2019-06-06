@@ -73,7 +73,8 @@ class Runtime {
     process.off('message', this.messageHandler);
     delete this.sandbox.send;
     delete this.sandbox.kill;
-    delete this.sandbox.createAgent
+    delete this.sandbox.createAgent;
+    delete this.sandbox.createWorkerForker;
     unbindError(this.errorHandler);
     const errorHandler = err => console.error('[closing error]:', err);
     bindError(errorHandler);
