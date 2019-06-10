@@ -54,6 +54,7 @@ class Runtime {
     this.processer = new processer(args.kind, args.mpid);
     this.processer.onExit(next => this.destroy().then(next).catch(next));
     this.sandbox = new sandbox(args);
+    this.sandbox.processer = this.processer;
     this.sandbox.kill = this.processer.kill.bind(this.processer);
     if (args.kind !== CHILD_PROCESS_TYPE.WORKER) {
       this.sandbox.createAgent = (name, file, _args) => this.processer.createAgent(args.cwd || process.cwd(), name, file, _args);
