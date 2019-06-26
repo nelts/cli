@@ -1,6 +1,6 @@
 # @nelts/cli
 
-`nelts`架构的辅助进程工具，通过这个工具可以启动nelts工程。
+`nelts`命令行工具
 
 ## Usage
 
@@ -10,103 +10,86 @@
 npm i @nelts/cli
 ```
 
-开发模式下启动
+## Server commanders
 
 ```bash
-node node_modules/@nelts/cli/src/script.js --script={start file name}
+Usage: nelts-server [options] [command]
+
+Options:
+  -v, --version    output the version number
+  -h, --help       output usage information
+
+Commands:
+  dev [options]
+  start [options]
+  restart
+  stop
 ```
 
-生产环境下启动，建议使用[PM2](https://www.npmjs.com/package/pm2)启动。
+### dev
 
 ```bash
-pm2 start node_modules/@nelts/cli/src/script.js --name={name} -- --script={start file name}
+Usage: dev [options]
+
+Options:
+  -b, --base <base>      project base dir<like package.json dirname> (default: ".")
+  -m, --max <max>        how many process would you like to bootstrap (default: 0)
+  -c, --config <config>  where is the config file which named nelts.config.<ts|js> (default: "nelts.config")
+  -p, --port <port>      which port do server run at? (default: 8080)
+  -h, --help             output usage information
 ```
 
-## Lifecycle
+### start
 
-每个启动的进程对应一个script文件地址，它具有以下的生命周期：
+```bash
+Usage: start [options]
 
-- `componentWillCreate` 进程启动前执行函数 此时 *messager* 不可用
-- `componentDidCreated` 进程启动完毕执行函数 此时 *messager* 可用
-- `componentWillDestroy` 进程结束前执行函数 此时 *messager* 可用
-- `componentDidDestroyed` 进程结束后执行函数 此时 *messager* 不可用
-- `componentCatchError` 统一错误捕获 参数为 `error: Error`
-- `componentReceiveMessage` 统一消息接受函数 `(message, socket) => {}`
-
-script文件内容必须是一个返回的class对象
-
-eg:
-
-```javascript
-module.exports = class {
-  async componentWillCreate() {}
-  async componentDidCreated() {}
-  async componentWillDestroy() {}
-  async componentDidDestroyed() {}
-  componentCatchError(err) {}
-  componentReceiveMessage(message, socket) {}
-}
+Options:
+  -b, --base <base>      project base dir<like package.json dirname> (default: ".")
+  -m, --max <max>        how many process would you like to bootstrap (default: 0)
+  -c, --config <config>  where is the config file which named nelts.config.<ts|js> (default: "nelts.config")
+  -p, --port <port>      which port do server run at? (default: 8080)
+  -h, --help             output usage information
 ```
 
-它具有以下隐式方法
+### restart
 
-- `this.send()` 发送消息
-- `this.kill()` 杀掉进程
-- `this.createAgent()` 创建子agent进程
-- `this.createWorkerForker()` 创建子worker进程
+```bash
+Usage: restart [options]
 
-## this.send(message: object, socket: Socket)
-
-- `message` {object} 消息体 `{ to, event, data }`
-- `socket` socket对象
-
-发送消息
-
-```javascript
-this.send({
-  to: 'test',
-  event: 'abc',
-  data: {
-    a: 1
-  }
-});
+Options:
+  -h, --help  output usage information
 ```
 
-## this.kill([pid: number])
+### stop
 
-杀掉自身进程或者指定进程，或者全局结束所有进程
+```bash
+Usage: stop [options]
 
-- `pid` 进程ID。如果省略就是杀掉所有相关进程。
-
-```javascript
-this.kill(process.pid);
-this.kill();
+Options:
+  -h, --help  output usage information
 ```
 
-## this.createAgent(name: string, file: string)
+## Client commanders
 
-创建一个agent进程
+```bash
+Usage: nelts [options] [command]
 
-- `name` 进程名
-- `file` 进程执行文件地址
+Options:
+  -v, --version   output the version number
+  -h, --help      output usage information
 
-```javascript
-const agent = await this.createAgent('test', 'test/file.js');
-// agent 就是对应的Node进程节点
+Commands:
+  init [project]
 ```
 
-## this.createWorkerForker(file: string)
+### init
 
-创建一个worker进程forker。
+```bash
+Usage: init [options] [project]
 
-- `file` 进程执行文件地址
-
-```javascript
-const fork = this.createWorkerForker('test/worker.js');
-await fork();
-await fork();
-await fork();
-await fork();
+Options:
+  -h, --help  output usage information
 ```
 
 # License

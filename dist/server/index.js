@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const program = require("commander");
+const dev_1 = require("./dev");
+const start_1 = require("./start");
+const restart_1 = require("./restart");
+const stop_1 = require("./stop");
+const pkg = require('../../package.json');
+program.version(pkg.version, '-v, --version');
+program.command('dev')
+    .option('-b, --base <base>', 'project base dir<like package.json dirname>', '.')
+    .option('-m, --max <max>', 'how many process would you like to bootstrap', 0)
+    .option('-c, --config <config>', 'where is the config file which named nelts.config.<ts|js>', 'nelts.config')
+    .option('-p, --port <port>', 'which port do server run at?', 8080)
+    .action(dev_1.default);
+program.command('start')
+    .option('-b, --base <base>', 'project base dir<like package.json dirname>', '.')
+    .option('-m, --max <max>', 'how many process would you like to bootstrap', 0)
+    .option('-c, --config <config>', 'where is the config file which named nelts.config.<ts|js>', 'nelts.config')
+    .option('-p, --port <port>', 'which port do server run at?', 8080)
+    .action(start_1.default);
+program.command('restart').action(restart_1.default);
+program.command('stop').action(stop_1.default);
+program.parse(process.argv);

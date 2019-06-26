@@ -1,22 +1,35 @@
 {
   "name": "@nelts/cli",
-  "version": "1.0.1",
-  "description": "nelts client inteface line tool",
-  "main": "src/index.js",
+  "version": "1.0.2",
+  "description": "nelts client line inteface tool",
+  "bin": {
+    "nelts-server": "dist/server/index.js",
+    "nelts": "dist/client/index.js"
+  },
   "scripts": {
-    "dev": "DEBUG=GateWay:* node src/script.js --script=test/index.js"
+    "build": "rm -rf dist/ && tsc -d"
   },
   "files": [
+    "dist",
     "src"
   ],
-  "author": "",
+  "author": "cevio",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/plugin-proposal-decorators": "^7.4.4",
-    "@babel/register": "^7.4.4",
-    "is-class": "0.0.7",
-    "minimist": "^1.2.0",
-    "reflect-metadata": "^0.1.13"
+    "@types/fs-extra": "^7.0.0",
+    "@types/node": "^12.0.10",
+    "@types/prompts": "^2.0.1",
+    "@types/randomstring": "^1.1.6",
+    "@types/request": "^2.48.1",
+    "@types/signale": "^1.2.1",
+    "@types/unzip": "^0.1.1",
+    "commander": "^2.20.0",
+    "fs-extra": "^8.0.1",
+    "prompts": "^2.1.0",
+    "randomstring": "^1.1.5",
+    "request": "^2.88.0",
+    "request-progress": "^3.0.0",
+    "signale": "^1.4.0",
+    "unzip": "^0.1.11"
   }
 }
