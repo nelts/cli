@@ -16,7 +16,7 @@ function Start(options) {
     if (options.max)
         args.push(`--max=${options.max}`);
     if (options.config)
-        args.push(`--config=${options.config}`);
+        args.push(`--config=dist/${options.config}`);
     if (options.port)
         args.push(`--port=${options.port}`);
     exec_1.default('pm2', args, { env: 'production' }).then(() => process.exit(0));

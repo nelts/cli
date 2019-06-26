@@ -1,6 +1,6 @@
 {
   "name": "@nelts/cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "nelts client line inteface tool",
   "bin": {
     "nelts-server": "dist/server/index.js",
