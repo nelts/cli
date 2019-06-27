@@ -5,5 +5,7 @@ const program = require("commander");
 const init_1 = require("./init");
 const pkg = require('../../package.json');
 program.version(pkg.version, '-v, --version');
-program.command('init [project]').action(init_1.default);
+program.command('init [project]')
+    .description('create a new project with nelts.')
+    .action(init_1.default);
 program.parse(process.argv);

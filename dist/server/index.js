@@ -9,17 +9,23 @@ const stop_1 = require("./stop");
 const pkg = require('../../package.json');
 program.version(pkg.version, '-v, --version');
 program.command('dev')
+    .description('run server as dev mode, env = development')
     .option('-b, --base <base>', 'project base dir<like package.json dirname>', '.')
     .option('-m, --max <max>', 'how many process would you like to bootstrap', 0)
     .option('-c, --config <config>', 'where is the config file which named nelts.config.<ts|js>', 'nelts.config')
     .option('-p, --port <port>', 'which port do server run at?', 8080)
     .action(dev_1.default);
 program.command('start')
+    .description('run server with pm2, env = production')
     .option('-b, --base <base>', 'project base dir<like package.json dirname>', '.')
     .option('-m, --max <max>', 'how many process would you like to bootstrap', 0)
-    .option('-c, --config <config>', 'where is the config file which named nelts.config.<ts|js>', 'nelts.config')
+    .option('-c, --config <config>', 'where is the config file which named nelts.config.<ts|js>', 'dist/nelts.config')
     .option('-p, --port <port>', 'which port do server run at?', 8080)
     .action(start_1.default);
-program.command('restart').action(restart_1.default);
-program.command('stop').action(stop_1.default);
+program.command('restart')
+    .description('restart the production server')
+    .action(restart_1.default);
+program.command('stop')
+    .description('stop the production server')
+    .action(stop_1.default);
 program.parse(process.argv);
