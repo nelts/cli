@@ -3,7 +3,8 @@ export interface DevOptions {
   base: string,
   max: string | number,
   config: string,
-  port: string | number
+  port: string | number,
+  level?: string,
 }
 
 export default function Dev(options: DevOptions) {
@@ -16,6 +17,7 @@ export default function Dev(options: DevOptions) {
   if (options.max) args.push(`--max=${options.max}`);
   if (options.config) args.push(`--config=${options.config}`);
   if (options.port) args.push(`--port=${options.port}`);
+  if (options.level) args.push(`--level=${options.level}`);
 
   exec('ts-node', args, { env: 'development' }).then(() => process.exit(0));
 }

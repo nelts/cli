@@ -15,6 +15,7 @@ program.command('dev')
   .option('-m, --max <max>', 'how many process would you like to bootstrap', 0)
   .option('-c, --config <config>', 'where is the config file which named nelts.config.<ts|js>', 'nelts.config')
   .option('-p, --port <port>', 'which port do server run at?', 8080)
+  .option('-l, --level <level>', 'logger level?', 'debug')
   .action(Dev);
 
 program.command('start')
@@ -23,6 +24,7 @@ program.command('start')
   .option('-m, --max <max>', 'how many process would you like to bootstrap', 0)
   .option('-c, --config <config>', 'where is the config file which named nelts.config.<ts|js>', 'dist/nelts.config')
   .option('-p, --port <port>', 'which port do server run at?', 8080)
+  .option('-l, --level <level>', 'logger level?', 'debug')
   .action(Start);
 
 program.command('restart')
