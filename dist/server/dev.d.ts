@@ -3,6 +3,6 @@ export interface DevOptions {
     max: string | number;
     config: string;
     port: string | number;
-    level?: string;
+    framework: string;
 }
 export default function Dev(options: DevOptions): void;

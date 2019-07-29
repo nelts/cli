@@ -14,8 +14,8 @@ function Dev(options) {
         args.push(`--config=${options.config}`);
     if (options.port)
         args.push(`--port=${options.port}`);
-    if (options.level)
-        args.push(`--level=${options.level}`);
+    if (options.framework)
+        args.push(`--framework=${options.framework}`);
     exec_1.default('ts-node', args, { env: 'development' }).then(() => process.exit(0));
 }
 exports.default = Dev;

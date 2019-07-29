@@ -15,7 +15,7 @@ program.command('dev')
   .option('-m, --max <max>', 'how many process would you like to bootstrap', 0)
   .option('-c, --config <config>', 'where is the config file which named nelts.config.<ts|js>', 'src/nelts.config')
   .option('-p, --port <port>', 'which port do server run at?', 8080)
-  .option('-l, --level <level>', 'logger level?', 'debug')
+  .option('-f, --framework <framework>', 'which framework install?', '@nelts/http')
   .action(Dev);
 
 program.command('start')

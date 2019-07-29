@@ -16,7 +16,7 @@ export default function Start(options: DevOptions) {
   if (options.max) args.push(`--max=${options.max}`);
   if (options.config) args.push(`--config=${options.config}`);
   if (options.port) args.push(`--port=${options.port}`);
-  if (options.level) args.push(`--level=${options.level}`);
+  if (options.framework) args.push(`--framework=${options.framework}`);
 
   exec('pm2', args, { env: 'production' }).then(() => process.exit(0));
 }
