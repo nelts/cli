@@ -5,6 +5,7 @@ export interface DevOptions {
   config: string,
   port: string | number,
   module: string,
+  env?: string,
 }
 
 export default function Dev(options: DevOptions) {
@@ -16,5 +17,5 @@ export default function Dev(options: DevOptions) {
   if (options.port) args.push(`--port=${options.port}`);
   if (options.module) args.push(`--module=${options.module}`);
 
-  exec('ts-node', args, { env: 'development' }).then(() => process.exit(0));
+  exec('ts-node', args, { env: options.env || 'development' }).then(() => process.exit(0));
 }

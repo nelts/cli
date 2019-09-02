@@ -17,5 +17,5 @@ export default function Start(options: DevOptions) {
   if (options.port) args.push(`--port=${options.port}`);
   if (options.module) args.push(`--module=${options.module}`);
 
-  exec('pm2', args, { env: 'production' }).then(() => process.exit(0));
+  exec('pm2', args, { env: options.env || 'production' }).then(() => process.exit(0));
 }

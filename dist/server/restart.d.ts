@@ -1,1 +1,2 @@
-export default function Start(): void;
+import { DevOptions } from './dev';
+export default function ReStart(options: DevOptions): void;
