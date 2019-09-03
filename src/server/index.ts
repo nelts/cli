@@ -16,7 +16,6 @@ program.command('dev')
   .option('-c, --config <config>', 'where is the config file which named nelts.config.<ts|js>', 'src/nelts.config')
   .option('-p, --port <port>', 'which port do server run at?', 8080)
   .option('-d, --module <module>', 'which module install?', '@nelts/nelts')
-  .option('-e, --env <env>', 'which env runing?', 'development')
   .action(Dev);
 
 program.command('start')
@@ -26,12 +25,10 @@ program.command('start')
   .option('-c, --config <config>', 'where is the config file which named nelts.config.<ts|js>', 'dist/nelts.config')
   .option('-p, --port <port>', 'which port do server run at?', 8080)
   .option('-d, --module <module>', 'which module install?', '@nelts/nelts')
-  .option('-e, --env <env>', 'which env runing?', 'production')
   .action(Start);
 
 program.command('restart')
   .description('restart the production server')
-  .option('-e, --env <env>', 'which env runing?', 'production')
   .action(ReStart);
 
 program.command('stop')

@@ -20,6 +20,6 @@ function Start(options) {
         args.push(`--port=${options.port}`);
     if (options.module)
         args.push(`--module=${options.module}`);
-    exec_1.default('pm2', args, { env: options.env || 'production' }).then(() => process.exit(0));
+    exec_1.default('pm2', args).then(() => process.exit(0));
 }
 exports.default = Start;

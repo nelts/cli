@@ -13,6 +13,6 @@ function Dev(options) {
         args.push(`--port=${options.port}`);
     if (options.module)
         args.push(`--module=${options.module}`);
-    exec_1.default('ts-node', args, { env: options.env || 'development' }).then(() => process.exit(0));
+    exec_1.default('ts-node', args).then(() => process.exit(0));
 }
 exports.default = Dev;
